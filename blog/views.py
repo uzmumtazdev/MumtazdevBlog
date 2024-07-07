@@ -46,6 +46,7 @@ def detail(request, pk):
     category = Category.objects.get(id=post.category.id)
     relation_posts = Post.objects.filter(category=category).exclude(id__in=[0, post.id])
     ratings = Rating.objects.filter(post=post)
+    tops = Post.objects.filter(on_top=True)
 
     request.session.modified = True
     if pk in check_view_articles(request):
@@ -78,7 +79,7 @@ def detail(request, pk):
         rating = 0
 
 
-    data = {'post': post, 'comments': comments, 'rating': rating, 'categories': categories, 'relation_posts': relation_posts}
+    data = {'post': post, 'comments': comments, 'rating': rating, 'tops': tops, 'categories': categories, 'relation_posts': relation_posts}
 
     return render(request, 'blog/detail.html', data)
 

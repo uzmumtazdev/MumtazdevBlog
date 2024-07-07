@@ -12,6 +12,7 @@ psycopg2-binary = "*"
 gunicorn = "*"
 dj-database-url = "*"
 whitenoise = "*"
+django-ckeditor = "*"
 
 [dev-packages]
 

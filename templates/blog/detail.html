@@ -70,17 +70,27 @@
             <div class="container-md">
                 <div class="d-flex flex-wrap my-3">
                 {% for cat in categories  %}
-                <div class="d-flex flex-wrap mx-3 my-2">
-                        <button type="button" class="btn btn-primary position-relative">
+                    <div class="d-flex flex-wrap mx-3 my-2">
+                        <a href="/?category={{cat.name}}" class="btn btn-primary position-relative">
                             {{ cat.name }}
                             <span
                                 class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                                 {{ cat.categories.count }}
                                 <span class="visually-hidden">unread messages</span>
                             </span>
-                        </button>
+                        </a>
                     </div>
-                    {% endfor %}
+                {% endfor %}
+                    <div class="d-flex flex-wrap mx-3 my-2">
+                        <a href="/?category=tops" class="btn btn-primary position-relative">
+                            TOP
+                            <span
+                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                {{ tops.all.count }}
+                                <span class="visually-hidden">unread messages</span>
+                            </span>
+                        </a>
+                    </div>
                 </div>
             </div>
             <div class="container-md">
@@ -98,7 +108,7 @@
                                     {% if post.image %}
                                        <img src="{{ post.image.url }}" class="card-img-top" alt="...">
                                     {% endif %}
-                                    <p class="card-text">{{ post.body }}</p>
+                                    <p class="card-text">{{ post.body|safe }}</p>
 
                                     <div class="d-flex justify-content-between flex-wrap">
                                         <div class="post-rating">

@@ -72,19 +72,27 @@
               <div class="container-md">
                 <div class="d-flex flex-wrap my-3">
                 {% for cat in categories  %}
-                <a href="?category={{ cat.name }}">
-                <div class="d-flex flex-wrap mx-3 my-2">
-                        <button type="button" class="btn btn-primary position-relative">
+                    <div class="d-flex flex-wrap mx-3 my-2">
+                        <a href="?category={{cat.name}}" class="btn btn-primary position-relative">
                             {{ cat.name }}
                             <span
                                 class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                                 {{ cat.categories.count }}
                                 <span class="visually-hidden">unread messages</span>
                             </span>
-                        </button>
+                        </a>
                     </div>
-                    </a>
-                    {% endfor %}
+                {% endfor %}
+                    <div class="d-flex flex-wrap mx-3 my-2">
+                        <a href="?category=tops" class="btn btn-primary position-relative">
+                            TOP
+                            <span
+                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                {{ tops.all.count }}
+                                <span class="visually-hidden">unread messages</span>
+                            </span>
+                        </a>
+                    </div>
                 </div>
             </div>
 
@@ -99,11 +107,10 @@
                                 <div class="card-body">
                                     <div class="content">
                                         <a href="/blog/{{post.id}}/" class="text-decoration-none"><h3 class="card-title fw-bold">{{ post.title }}</h3></a>
-                                        <h5 class="card-title fw-bold">{{ post.summary }}</h5>
                                         {% if post.image %}
                                            <img src="{{ post.image.url }}" class="card-img-top" alt="...">
                                         {% endif %}
-                                        <p class="card-text">{{ post.body|truncatewords:'40'|safe }}</p>
+                                        <p class="card-text">{{ post.summary }}</p>
                                         {% for tag in post.tag.all %}
                                             <span class="badge rounded-pill text-bg-secondary">{{ tag.name }}</span>
                                         {% endfor %}
@@ -157,7 +164,7 @@
                         </div>
                         <div class="col-sm-none col-md-3">
                             <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-body-tertiary" style="width: 380px;">
-                                <a href="/" class="d-flex align-items-center flex-shrink-0 p-3 link-body-emphasis text-decoration-none border-bottom">
+                                <a href="#" class="d-flex align-items-center flex-shrink-0 p-3 link-body-emphasis text-decoration-none border-bottom">
                                   <svg class="bi pe-none me-2" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
                                   <span class="fs-5 fw-semibold">Oxirgi fikrlar</span>
                                 </a>
