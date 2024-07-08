@@ -1,0 +1,43 @@
+name: Django Deployment
+
+on:
+  push:
+    branches:
+      - main  # faqat asosiy branchga push qilganda ishga tushadi
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run migrations
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}  # secret ma'lumotlarni ishlatish
+        run: |
+          python manage.py makemigrations
+          python manage.py migrate
+
+      - name: Collect static files
+        run: python manage.py collectstatic --noinput
+
+      - name: Deploy to Render
+        env:
+          API_KEY: ${{ secrets.RENDER_API_KEY }}
+        run: |
+          curl -X POST -H "Authorization: Bearer $API_KEY" \
+          -d branch=main \
+          -d serviceId=<your-service-id> \
+          https://api.render.com/v1/services/<your-service-id>/deploys
