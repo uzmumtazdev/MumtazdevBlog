@@ -131,6 +131,18 @@
                                             {% for tag in post.tag.all %}
                                             <span class="badge rounded-pill text-bg-secondary">{{ tag.name }}</span>
                                             {% endfor %}
+                                            <div class="btn-group" role="group">
+                                                <button id="btnGroupDrop1" type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                                  Ulashish
+                                                </button>
+                                                <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                                  <li><a class="dropdown-item" href="https://t.me/share?url={{ request.build_absolute_uri }}">Telegram'da ulashish</a></li>
+                                                  <li><a class="dropdown-item" href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}">Facebook'da ulashish</a></li>
+                                                  <li><a class="dropdown-item" href="https://www.linkedin.com/shareArticle?url={{ request.build_absolute_uri }}">LinkedIn'da ulashish</a></li>
+                                                  <li><a class="dropdown-item" href="https://twitter.com/share?url={{ request.build_absolute_uri }}">Twitter'da ulashish</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
                                         </div>
                                         <div class="action">
                                             <span class="badge bg-primary rounded-pill">
