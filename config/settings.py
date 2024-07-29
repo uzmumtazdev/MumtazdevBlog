@@ -1,6 +1,7 @@
 from pathlib import Path
 from decouple import config
 import dj_database_url
+import cloudinary_storage
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -112,8 +113,8 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATIC_ROOT = str(BASE_DIR.joinpath('static'))
 
-MEDIA_URL = 'media/'
-MEDIA_ROOT = str(BASE_DIR.joinpath('media'))
+MEDIA_URL = 'https://ik.imagekit.io/eawcaf7qu/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 STATICFILES_DIRS = [str(BASE_DIR.joinpath('staticfiles'))]
 
@@ -133,3 +134,7 @@ CKEDITOR_CONFIGS = {
         'toolbar': 'All',
     },
 }
+
+IMAGEKIT_PUBLIC_KEY = config("IMAGEKIT_PUBLIC_KEY")
+IMAGEKIT_PRIVATE_KEY = config("IMAGEKIT_PRIVATE_KEY")
+IMAGEKIT_URL_ENDPOINT = config("IMAGEKIT_URL_ENDPOINT")

@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import user_passes_test
 from .models import Post, Tag, Category, Rating, Comment
 from django.core.paginator import Paginator
 from .utils import check_view_articles
-
+from .forms import PostForm
+from .helpers import ImagekitClient
 # Create your views here.
 def home(request):
     posts = Post.objects.all()
@@ -83,3 +85,22 @@ def detail(request, pk):
 
     return render(request, 'blog/detail.html', data)
 
+def staff_check(user):
+    return user.is_staff
+
+@user_passes_test(staff_check)
+def create_post(request):
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            image = request.FILES.get('image')
+            if image is not None:
+                imgkit = ImagekitClient(image)
+                result = imgkit.upload_media_file()
+                post.image = result['url']
+                post.save()
+            return redirect('/blog/'+str(post.id)+'/')
+    else:
+        form = PostForm()
+    return render(request, 'blog/create_post.html', {'form': form})

@@ -108,7 +108,7 @@
                                     <div class="content">
                                         <a href="/blog/{{post.id}}/" class="text-decoration-none"><h3 class="card-title fw-bold">{{ post.title }}</h3></a>
                                         {% if post.image %}
-                                           <img src="{{ post.image.url }}" class="card-img-top" alt="...">
+                                           <img src="{{ post.image }}" class="card-img-top" alt="...">
                                         {% endif %}
                                         <p class="card-text">{{ post.summary }}</p>
                                         {% for tag in post.tag.all %}
