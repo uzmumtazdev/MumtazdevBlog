@@ -143,6 +143,8 @@
                                                 </ul>
                                             </div>
                                         </div>
+
+                                        </div>
                                         <div class="action">
                                             <span class="badge bg-primary rounded-pill">
                                                 <i class="bi bi-list-stars"></i>
@@ -165,6 +167,24 @@
 
                                 </div>
                             </div>
+                        </div>
+                        <div class="col-sm-none col-md-12 col-lg-3">
+
+
+                            <span class="fs-5 fw-semibold">O'xshash maqolalar</span>
+                            <ol class="list-group list-group-numbered">
+                                {% for post in relation_posts %}
+                                <li class="list-group-item d-flex justify-content-between align-items-start">
+                                    <div class="ms-2 me-auto">
+                                        <div class="fw-bold"><a style="text-decoration: none; color: black;" href="/blog/{{ post.id }}/">{{ post.title }}</a></div>
+                                    </div>
+                                    <span class="badge bg-primary rounded-pill">
+                                        <i class="bi bi-eye"></i>
+                                        {{ post.views }}
+                                    </span>
+                                </li>
+                                {% endfor %}
+                            </ol>
                         </div>
                         <!-- END POST CARDS  -->
                         <div class="comments">
@@ -197,24 +217,6 @@
 
                             </div>
                         </div>
-                    </div>
-                    <div class="col-sm-none col-md-12 col-lg-3">
-
-
-                        <span class="fs-5 fw-semibold">O'xshash maqolalar</span>
-                        <ol class="list-group list-group-numbered">
-                            {% for post in relation_posts %}
-                            <li class="list-group-item d-flex justify-content-between align-items-start">
-                                <div class="ms-2 me-auto">
-                                    <div class="fw-bold"><a style="text-decoration: none; color: black;" href="/blog/{{ post.id }}/">{{ post.title }}</a></div>
-                                </div>
-                                <span class="badge bg-primary rounded-pill">
-                                    <i class="bi bi-eye"></i>
-                                    {{ post.views }}
-                                </span>
-                            </li>
-                            {% endfor %}
-                        </ol>
                     </div>
                 </div>
             </div>
